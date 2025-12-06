@@ -1,13 +1,19 @@
 // Simple in-memory user store for demo purposes.
-const { v4: uuid } = require("uuid");
-
 const store = new Map();
+
+// helper: ESM dynamic import for uuid
+async function getUuid() {
+	const { v4: uuid } = await import("uuid");
+	return uuid;
+}
 
 exports.getAll = async () => Array.from(store.values());
 
 exports.getById = async (id) => store.get(id) || null;
 
 exports.create = async (data) => {
+	const uuid = await getUuid();
+
 	const id = uuid();
 	const user = { id, ...data, createdAt: new Date().toISOString() };
 	store.set(id, user);
@@ -16,6 +22,7 @@ exports.create = async (data) => {
 
 exports.update = async (id, data) => {
 	if (!store.has(id)) return null;
+
 	const existing = store.get(id);
 	const updated = {
 		...existing,
