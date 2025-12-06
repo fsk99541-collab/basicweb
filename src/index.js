@@ -1,10 +1,4 @@
-require('dotenv').config();
-const app = require('./app');
+const serverless = require("serverless-http");
+const app = require("./app"); // path to your express app (adjust if needed)
 
-
-const PORT = process.env.PORT || 3000;
-
-
-app.listen(PORT, () => {
-console.log(`Server listening on port ${PORT} — env=${process.env.NODE_ENV || 'development'}`);
-});
+module.exports = serverless(app);
