@@ -1,10 +1,11 @@
 // Simple in-memory user store for demo purposes.
+const crypto = require("crypto"); // built-in, works everywhere
+
 const store = new Map();
 
-// helper: ESM dynamic import for uuid
-async function getUuid() {
-	const { v4: uuid } = await import("uuid");
-	return uuid;
+// helper
+function generateId() {
+	return crypto.randomUUID(); // no ESM issues!
 }
 
 exports.getAll = async () => Array.from(store.values());
@@ -12,9 +13,7 @@ exports.getAll = async () => Array.from(store.values());
 exports.getById = async (id) => store.get(id) || null;
 
 exports.create = async (data) => {
-	const uuid = await getUuid();
-
-	const id = uuid();
+	const id = generateId();
 	const user = { id, ...data, createdAt: new Date().toISOString() };
 	store.set(id, user);
 	return user;
@@ -29,6 +28,7 @@ exports.update = async (id, data) => {
 		...data,
 		updatedAt: new Date().toISOString(),
 	};
+
 	store.set(id, updated);
 	return updated;
 };
