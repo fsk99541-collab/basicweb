@@ -14,7 +14,7 @@ let users = [
 
 // Root
 app.get("/", (req, res) => {
-	res.json({ status: "ok", message: "Basic Express server" });
+	res.json({ status: "ok", message: "Basic Express server", turn: 1 });
 });
 
 // List users
@@ -32,8 +32,8 @@ app.get("/users/:id", (req, res) => {
 
 // Create user
 app.post("/users", (req, res) => {
-    const { name } = req.body;
-    console.log(name)
+    // const { name } = req.body;
+    const name = req.body.name;
 	if (!name) return res.status(400).json({ error: "Name is required" });
 	const id = users.length ? Math.max(...users.map((u) => u.id)) + 1 : 1;
 	const newUser = { id, name };
