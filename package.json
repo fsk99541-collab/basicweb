@@ -1,0 +1,28 @@
+{
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^17.2.3",
+    "express": "^5.2.1",
+    "express-generator": "^4.16.1",
+    "helmet": "^8.1.0",
+    "joi": "^18.0.2",
+    "morgan": "^1.10.1",
+    "uuid": "^13.0.0"
+  },
+  "name": "p4-vercel",
+  "version": "1.0.0",
+  "description": "Minimal Express backend (REST APIs)",
+  "main": "src/index.js",
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "nodemon --watch src --exec node src/index.js",
+    "lint": "echo \"Add linter command\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "nodemon": "^3.1.11"
+  }
+}
