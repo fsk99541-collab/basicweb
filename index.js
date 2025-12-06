@@ -6,7 +6,6 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
 // Simple in-memory "DB"
 let users = [
 	{ id: 1, name: "Alice" },
